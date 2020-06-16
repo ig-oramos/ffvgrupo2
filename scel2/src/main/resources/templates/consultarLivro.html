@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scel - Consulta de Livros</title>
+</head>
+<body>
+    <h3>Consultar livro</h3>
+    <p>Aplicação Web. Parâmetro recebido: <a href="#" th:text="${message}"></a></p>
+    <p>Data atual - <span th:text="${serverDate}"></span></p>
+    <tbody>
+        <tr th:each="Livro: ${livros}">
+            <td th:text="${livro.isbn}"></td>
+            <td th:text="${livro.titulo}"></td>
+        </tr>
+    </tbody>
+</body>
+</html>
