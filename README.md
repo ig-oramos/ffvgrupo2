@@ -8,3 +8,5 @@ nos próximos incrementos.
 O processo de desenvolvimento fluiu de forma consistente, as funcionalidades foram implementadas continuamente,
 cada nova iteração produziu diferentes resultados que careciam em alguns momentos de correção. No fim a abordagem
 incremental resultou na finalização de partes dos requisitos.
+
+CRUD de usuario.
