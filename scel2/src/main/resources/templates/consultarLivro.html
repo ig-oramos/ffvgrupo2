@@ -7,12 +7,12 @@
 </head>
 <body>
     <h3>Consultar livro</h3>
-    <p>Aplicação Web. Parâmetro recebido: <a href="#" th:text="${message}"></a></p>
     <p>Data atual - <span th:text="${serverDate}"></span></p>
     <tbody>
         <tr th:each="Livro: ${livros}">
             <td th:text="${livro.isbn}"></td>
             <td th:text="${livro.titulo}"></td>
+            <td th:text="${livro.autor}"></td>
         </tr>
     </tbody>
 </body>

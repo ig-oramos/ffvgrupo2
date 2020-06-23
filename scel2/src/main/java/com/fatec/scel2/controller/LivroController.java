@@ -1,10 +1,3 @@
-/*
-        (Todos num mesmo relatório)
-        Revisão sprint
-        O resultado foi satisfatório, necessidade de ajustes etc.
-        Retrospectiva
-        O que funcionou bem? O que dificultou? O que aconteceu?
-        */
 package com.fatec.scel2.controller;
 
 import javax.validation.Valid;
@@ -27,6 +20,11 @@ public class LivroController {
     Logger logger = LogManager.getLogger(LivroController.class);
     @Autowired
     LivroServico servico;
+
+    @GetMapping("/menu")
+    public String home() {
+        return "menu";
+    }
 
     @GetMapping("/consultar")
     public ModelAndView retornaFormDeConsultaTodosLivros() {
@@ -60,8 +58,11 @@ public class LivroController {
     @PostMapping("/save")
     public ModelAndView save(@Valid Livro livro, BindingResult result) {
         ModelAndView modelAndView = new ModelAndView("consultarLivro");
+        System.out.println(livro.getIsbn());
         if (result.hasErrors()) {
             modelAndView.setViewName("cadastrarLivro");
+            String msg = result.getAllErrors().get(0).getDefaultMessage();
+            modelAndView.addObject("message", msg);
         } else {
             modelAndView = servico.verificaIsbnJaExiste(livro);
         }

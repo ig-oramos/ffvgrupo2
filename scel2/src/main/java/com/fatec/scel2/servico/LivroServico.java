@@ -43,7 +43,7 @@ public class LivroServico {
             jaExiste = repository.findByIsbn(livro.getIsbn());
             logger.info("=====> Verifica se o livro já existe = " + livro.getIsbn());
             if (jaExiste == null) {
-                logger.info("=====> Livro não cadastrado");
+                logger.info("=====> Livro não cadastrado" + livro.getAutor());
                 repository.save(livro);
                 mv.addObject("livros", repository.findAll());
             } else {
