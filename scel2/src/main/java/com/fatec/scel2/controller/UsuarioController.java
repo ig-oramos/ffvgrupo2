@@ -38,8 +38,46 @@ public class UsuarioController {
      // diz respeito ao método que irá responder a uma requisição do tipo get
     @GetMapping("/edit/{ra}")
     public ModelAndView retornaFormParaEditarUsuario(@PathVariable("ra") String ra) {
-        ModelAndView mv = new ModelAndView("usuarios/atualizarLivro");
+        ModelAndView mv = new ModelAndView("usuarios/atualizarUsuario");
         mv.addObject("usuario", servico.findByRa(ra)); // o repositório é injetado no controller
         return mv; // addObject adiciona objetos para a view
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView excluirNoFormDeConsultaTodosOsUsuarios(@PathVariable("id") Long id) {
+        servico.deleteById(id);
+        ModelAndView mv = new ModelAndView("/usuarios");
+        mv.addObject("usuarios", servico.findAll());
+        return mv;
+    }
+
+    @PostMapping("/save")
+    public ModelAndView save(@Valid Usuario usuario, BindingResult result) {
+        ModelAndView mv = new ModelAndView("usuarios/consultarUsuario");
+
+        if (result.hasErrors())
+            mv.setViewName("usuarios/cadastrarUsuario");
+        else
+            mv = servico.verificaRaExiste(usuario);
+
+        return mv;
+    }
+
+    @PostMapping("/update/{id}")
+    public ModelAndView atualizaUsuario(@PathVariable("id") Long id, @Valid Usuario usuario,
+        BindingResult result) {
+        if (result.hasErrors()) {
+            usuario.setId(id);
+            return new ModelAndView("usuarios/atualizarLivro");
+        }
+
+        Usuario umUsuario = servico.findById(id);
+        umUsuario.setRa(usuario.getRa());
+        umUsuario.setNome(usuario.getNome());
+        umUsuario.setEmail(usuario.getEmail());
+        servico.save(umUsuario);
+        ModelAndView mv = new ModelAndView("/usuarios/atualizarUsuario");
+        mv.addObject("usuarios", servico.findAll());
+        return mv;
     }
 }
