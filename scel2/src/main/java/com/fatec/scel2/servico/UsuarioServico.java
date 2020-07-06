@@ -12,7 +12,7 @@ import com.fatec.scel2.model.UsuarioRepository;
 
 @Service
 public class UsuarioServico {;
-    Logger logger = new LogManager.getLogger(UsuarioServico.class);
+    Logger logger = LogManager.getLogger(UsuarioServico.class);
     @Autowired
     private UsuarioRepository repository;
 
@@ -25,7 +25,7 @@ public class UsuarioServico {;
     }
 
     public Usuario findByRa(String ra) {
-        return repository.findByRa(ra).get();
+        return repository.findByRa(ra);
     }
 
     public void deleteById(Long id) {
@@ -38,7 +38,8 @@ public class UsuarioServico {;
 
     public String obtemEndereco(String cep) {
         RestTemplate template = new RestTemplate();
-        String url = "https://viacep.com.br/ws/{cep}/json/";
+        String url = "https://viacep.com.br/ws/" + cep + "/json/";
+        System.out.println(url);
         Endereco endereco = template.getForObject(url, Endereco.class, cep);
         return endereco.getLogradouro();
     }
@@ -49,21 +50,21 @@ public class UsuarioServico {;
         try {
             Usuario jaExiste = null;
             jaExiste = repository.findByRa(usuario.getRa());
-            logger.info("=======> Verifica se usuario ja existe = " + usuario.getRa());
+            logger.info("=======> Verifica se usuário já existe = " + usuario.getRa());
             if (jaExiste == null) {
-                logger.info("=======> Usuario nao cadastrado");
+                logger.info("=======> Usuário não cadastrado");
                 usuario.setEndereco(obtemEndereco(usuario.getCep()));
                 repository.save(usuario);
                 mv.addObject("usuarios", repository.findAll());
             } else {
-                logger.info("=======> Usuario cadastrado");
+                logger.info("=======> Usuário cadastrado");
                 mv.setViewName("usuarios/cadastrarUsuario");
-                mv.addObject("message", "Usuario ja cadastrado");
+                mv.addObject("message", "Usuário já cadastrado");
             }
         } catch (Exception e) {
-            logger.error("=======> Exceçao nao prevista - save() - cadastra usuario");
+            logger.error("=======> Exceçao não prevista - save() - cadastra usuario\n" + e.getMessage());
             mv.setViewName("usuarios/cadastrarUsuario");
-            mv.addObject("message", "Exceçao nao prevista");
+            mv.addObject("message", "Exceção não prevista");
         }
 
         return mv;

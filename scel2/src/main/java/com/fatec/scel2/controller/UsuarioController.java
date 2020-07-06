@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.fatec.scel2.model.Livro;
 import com.fatec.scel2.model.Usuario;
 import com.fatec.scel2.servico.UsuarioServico;
 
@@ -24,7 +23,7 @@ public class UsuarioController {
 
     @GetMapping("/consultar")
     public ModelAndView retornaFormConsultaDeTodosOsUsuarios() {
-        ModelAndView mv = new ModelAndView("/usuarios/consultarUsuario");
+        ModelAndView mv = new ModelAndView("usuarios/consultarUsuario");
         mv.addObject("usuarios", servico.findAll());
         return mv;
     }
@@ -46,7 +45,7 @@ public class UsuarioController {
     @GetMapping("/delete/{id}")
     public ModelAndView excluirNoFormDeConsultaTodosOsUsuarios(@PathVariable("id") Long id) {
         servico.deleteById(id);
-        ModelAndView mv = new ModelAndView("/usuarios");
+        ModelAndView mv = new ModelAndView("usuarios/consultarUsuario");
         mv.addObject("usuarios", servico.findAll());
         return mv;
     }
@@ -55,8 +54,10 @@ public class UsuarioController {
     public ModelAndView save(@Valid Usuario usuario, BindingResult result) {
         ModelAndView mv = new ModelAndView("usuarios/consultarUsuario");
 
-        if (result.hasErrors())
+        if (result.hasErrors()) {
+            System.out.println(result.getAllErrors().get(0));
             mv.setViewName("usuarios/cadastrarUsuario");
+        }
         else
             mv = servico.verificaRaExiste(usuario);
 

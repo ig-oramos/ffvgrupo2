@@ -24,7 +24,7 @@ public class Usuario {
     private String cep;
     @NotNull
     @Size(min = 1, max = 50, message = "Endereço deve ter entre 1 e 50 caracteres")
-    private String endereco;
+    private String endereco = "undefined";
 
     public Usuario() {
 
