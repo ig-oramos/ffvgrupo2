@@ -21,28 +21,23 @@ public class LivroController {
     @Autowired
     LivroServico servico;
 
-    @GetMapping("/menu")
-    public String home() {
-        return "menu";
-    }
-
     @GetMapping("/consultar")
     public ModelAndView retornaFormDeConsultaTodosLivros() {
-        ModelAndView modelAndView = new ModelAndView("consultarLivro");
+        ModelAndView modelAndView = new ModelAndView("livros/consultarLivro");
         modelAndView.addObject("livros", servico.findAll());
         return modelAndView;
     }
 
     @GetMapping("/cadastrar")
     public ModelAndView retornaFormDeCadastroDe(Livro livro) {
-        ModelAndView mv = new ModelAndView("cadastrarLivro");
+        ModelAndView mv = new ModelAndView("livros/cadastrarLivro");
         mv.addObject("livro", livro);
         return mv;
     }
 
     @GetMapping("/edit/{isbn}") // diz ao metodo que ira responder a uma requisicao do tipo get
     public ModelAndView retornaFormParaEditarLivro(@PathVariable("isbn") String isbn) {
-        ModelAndView modelAndView = new ModelAndView("atualizarLivro");
+        ModelAndView modelAndView = new ModelAndView("livros/atualizarLivro");
         modelAndView.addObject("livro", servico.findByIsbn(isbn)); // o repositorio e injetado no controller
         return modelAndView; // addObject adiciona objetos para view
     }
@@ -50,17 +45,17 @@ public class LivroController {
     @GetMapping("/delete/{id}")
     public ModelAndView excluiNoFormDeConsultaLivro(@PathVariable("id") Long id) {
         servico.deleteById(id);
-        ModelAndView modelAndView = new ModelAndView("consultarLivro");
+        ModelAndView modelAndView = new ModelAndView("livros/consultarLivro");
         modelAndView.addObject("livros", servico.findAll());
         return modelAndView;
     }
 
     @PostMapping("/save")
     public ModelAndView save(@Valid Livro livro, BindingResult result) {
-        ModelAndView modelAndView = new ModelAndView("consultarLivro");
+        ModelAndView modelAndView = new ModelAndView("livros/consultarLivro");
         System.out.println(livro.getIsbn());
         if (result.hasErrors()) {
-            modelAndView.setViewName("cadastrarLivro");
+            modelAndView.setViewName("livros/cadastrarLivro");
             String msg = result.getAllErrors().get(0).getDefaultMessage();
             modelAndView.addObject("message", msg);
         } else {
@@ -73,7 +68,7 @@ public class LivroController {
     public ModelAndView atualizaLivro(@PathVariable("id") Long id, @Valid Livro livro, BindingResult result) {
         if (result.hasErrors()) {
             livro.setId(id);
-            return new ModelAndView("atualizarLivro");
+            return new ModelAndView("livros/atualizarLivro");
         }
         // programacao defensiva - melhorar deve-se verificar se o livro existe antes de
         // atualizar
@@ -82,7 +77,7 @@ public class LivroController {
         umLivro.setIsbn(livro.getIsbn());
         umLivro.setTitulo(livro.getTitulo());
         servico.save(umLivro);
-        ModelAndView modelAndView = new ModelAndView("consultarLivro");
+        ModelAndView modelAndView = new ModelAndView("livros/consultarLivro");
         modelAndView.addObject("livros", servico.findAll());
         return modelAndView;
     }

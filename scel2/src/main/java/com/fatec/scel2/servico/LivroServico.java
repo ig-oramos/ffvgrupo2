@@ -36,7 +36,7 @@ public class LivroServico {
     }
 
     public ModelAndView verificaIsbnJaExiste(Livro livro) {
-        ModelAndView mv = new ModelAndView("consultarLivro");
+        ModelAndView mv = new ModelAndView("livros/consultarLivro");
 
         try {
             Livro jaExiste = null;
