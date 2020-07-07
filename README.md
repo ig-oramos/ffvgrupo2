@@ -28,9 +28,9 @@ O processo de desenvolvimento segue uma adaptação do Scrum. Cada interação t
 código é avaliado pelo time junto com o professor na atividade de revisão da sprint. Em seguida a reunião de restrospectiva do sprint é
 realizada pelo grupo e uma ata é publicada no Teams.
 
-<h4>Problemas de implementacao</h4>
-<p>A implementacao gerou uma serie de problemas, os principais foram no momento de implementar o cadastro de livros, usuarios e emprestimos.
-O maior trabalho foi o registro de emprestimos sendo que os outros registros nao consumiram tanto quanto ele. Mas no fim, apos muito
+<h4>Problemas de implementação</h4>
+<p>A implementação gerou uma série de problemas, os principais foram no momento de implementar o cadastro de livros, usuários e empréstimos.
+O maior trabalho foi o registro de empréstimos sendo que os outros registros nao consumiram tanto quanto ele. Mas no fim, apos muito
 esforco conseguimos implementar essa funcionalidade tao importante para o projeto. Outras funcionalidades como o login foram consideravelmente
 mais simples do que as comentadas acima. O menu ficou um pouco mais simples, no entanto ajuda bastante na navegacao.</p>
 
