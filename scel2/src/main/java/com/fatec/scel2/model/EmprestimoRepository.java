@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LivroRepository extends CrudRepository<Livro, Long> {
-    @Query("SELECT l FROM Livro l WHERE l.isbn = :isbn")
-    public Livro findByIsbn(@Param("isbn") String isbn);
+public interface EmprestimoRepository extends CrudRepository<Emprestimo, Long> {
+    @Query("SELECT e FROM Emprestimo e WHERE e.id = :id")
+    public Emprestimo findById(@Param("id") String id);
 }

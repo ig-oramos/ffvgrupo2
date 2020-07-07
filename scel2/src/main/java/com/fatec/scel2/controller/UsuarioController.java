@@ -77,7 +77,7 @@ public class UsuarioController {
         umUsuario.setNome(usuario.getNome());
         umUsuario.setEmail(usuario.getEmail());
         servico.save(umUsuario);
-        ModelAndView mv = new ModelAndView("/usuarios/atualizarUsuario");
+        ModelAndView mv = new ModelAndView("/usuarios/consultarUsuario");
         mv.addObject("usuarios", servico.findAll());
         return mv;
     }

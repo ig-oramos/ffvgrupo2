@@ -39,7 +39,6 @@ public class UsuarioServico {;
     public String obtemEndereco(String cep) {
         RestTemplate template = new RestTemplate();
         String url = "https://viacep.com.br/ws/" + cep + "/json/";
-        System.out.println(url);
         Endereco endereco = template.getForObject(url, Endereco.class, cep);
         return endereco.getLogradouro();
     }
@@ -51,6 +50,7 @@ public class UsuarioServico {;
             Usuario jaExiste = null;
             jaExiste = repository.findByRa(usuario.getRa());
             logger.info("=======> Verifica se usuário já existe = " + usuario.getRa());
+
             if (jaExiste == null) {
                 logger.info("=======> Usuário não cadastrado");
                 usuario.setEndereco(obtemEndereco(usuario.getCep()));
@@ -62,7 +62,8 @@ public class UsuarioServico {;
                 mv.addObject("message", "Usuário já cadastrado");
             }
         } catch (Exception e) {
-            logger.error("=======> Exceçao não prevista - save() - cadastra usuario\n" + e.getMessage());
+            logger.error("=======> Exceçao não prevista - save() - cadastra usuario\n" +
+                e.getMessage());
             mv.setViewName("usuarios/cadastrarUsuario");
             mv.addObject("message", "Exceção não prevista");
         }

@@ -15,10 +15,18 @@
         <nav class="navbar navbar-inverse navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="btn btn-dark navbar-toggle pull-left">
-                        <img src="images/menu-icon.svg" alt="menu">
-                    </button>
                     <a href="/menu" class="navbar-brand">Sistema de Controle de Empréstimo de Livros</a>
+                    <div class="dropdown" style="float: right;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Menu
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <a href="/"><button class="dropdown-item" type="button">Home</button></a>
+                            <a href="/livros/cadastrar"><button class="dropdown-item" type="button">Cadastrar Livro</button></a>
+                            <a href="/usuarios/cadastrar"><button class="dropdown-item" type="button">Cadastrar Usuario</button></a>
+                            <a href="/emprestimos/cadastrar"><button class="dropdown-item" type="button">Registrar Emprestimo</button></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

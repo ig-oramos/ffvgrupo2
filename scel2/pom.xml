@@ -15,7 +15,7 @@
 	<description>Second Spring Boot Application</description>
 
 	<properties>
-		<java.version>8</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -66,6 +66,13 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.10.6</version>
 		</dependency>
 	</dependencies>
 
