@@ -63,6 +63,7 @@ mais protótipos de arquitetura. O projeto do “Sistema de Controle de Emprést
 permita flexibilidade na configuração do sistema de persistência (mudança do sistema de gerenciamento de banco de dados) e
 manutenções na interface de usuário com poucos efeitos colaterais. A arquitetura selecionada para atender esta necessidade é a
 arquitetura MVC.
+<h5>Divisao de tarefas</h5>
 A estratégia de construção e integração do software será ascendente na hierarquia de controle, ou seja, da base de dados (backend) para
 a interface de interação homem máquina (frontend).
 <h4>Modelo de Domínio</h4>
